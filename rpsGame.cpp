@@ -8,13 +8,19 @@ int main()
 
     //declaring variables
     int amtOfGames, aiGuess, choice;  
-
-    string rock, paper, sci, aiGuess2;
-    rock = "rock";
-    paper = "paper";
-    sci = "scissors";
+    string choices[3] = {"rock", "paper", "scissors"};
 
     //finding out how many games to play
+    cout << endl;
+    
+    //creating top barrier
+    for (int x = 0; x < 30; x++)
+    {
+        cout << "*";
+    }
+    cout << endl;
+    
+    //finding out how many times the user would like to play
     cout << "How many games would you like to play? ";
     cin >> amtOfGames;
     
@@ -24,57 +30,47 @@ int main()
     cout << "2. Paper" << endl;
     cout << "3. Scissors" << endl;
     cout << "******************\n\n";
+
+    //for loop to play the game 'amtOfGames' amount of times
     for (int i = 0; i < amtOfGames; i++)
     {
-        cout << "Choose a number with the corresponding item. " << endl;
-        cin >> choice; 
+        cout << "Enter your choice (1-3): ";
+        cin >> choice;
+
+        //while number isn't 1-3
+        while (choice < 1 || choice > 3)
+        {
+            cout << "Inavlid choice. Try again: ";
+            cin >> choice;
+        }
+
+        //generate random choice for computer (1-3)
         aiGuess = rand() % 3 + 1;
-        //if aiGuess equals a num, convert it to its item
-        if (aiGuess == 1)
-        {
-            aiGuess2 = "Rock";
-        }
-        else if (aiGuess == 2)
-        {
-            aiGuess2 = "Paper"; 
-        }
-        else 
-        {
-            aiGuess2 = "Scissors";
-        }
-        //if choice equals a certain num, convert to its item
-        if (choice == 1)
-        {
-            cout << "Rock vs. " << aiGuess2 << endl;
-        }
-        else if (choice == 2)
-        {
-            cout << "Paper vs. " << aiGuess2 << endl;
-        }
-        else 
-        {
-            cout << "Scissors vs. " << aiGuess2 << endl;
-        }
-       
+
+        //outputting what was chosen from both the computer and the user
+        cout << "You chose: " << choices[choice - 1] << endl;
+        cout << "Computer chose: " << choices[aiGuess - 1] << endl;
+
+        //determining who won
         if (choice == aiGuess)
         {
-            cout << "It ended in a tie." << endl;
+            cout << "Tie!" << endl;
         }
-        else if (aiGuess < choice)
+        else if (choice == 1 && aiGuess == 3 || choice == 2 && aiGuess == 1 || choice == 3 && aiGuess == 2)
         {
             cout << "You win!" << endl;
         }
-        else if (choice == 1 && aiGuess == 3)
+        else
         {
-            cout << "You lose";
+            cout << "You lose!" << endl;      
         }
-        else 
-        {
-            cout << "You win!" << endl;
-        }
+    } //end of for loop
+
+    //create bottom barrier
+    for (int z = 0; z < 30; z++)
+    {
+        cout << "*";
     }
-    cout << endl;
-    cout << "Thank you for playing my Rock Paper Scissors game!";
     return 0;
 }
 
